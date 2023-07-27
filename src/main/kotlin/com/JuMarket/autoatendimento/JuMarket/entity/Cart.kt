@@ -7,11 +7,11 @@ import java.math.BigDecimal
 data class Cart(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    var id: Long? = null,
     @ManyToMany
     var items: List<Product>,
     @Column(nullable = false, unique = true)
     var itemCount: Int,
     @Column(nullable = false, unique = true)
-    var totalValue: BigDecimal,
+    var totalValue: BigDecimal
 )

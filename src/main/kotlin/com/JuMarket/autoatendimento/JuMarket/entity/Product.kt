@@ -13,11 +13,9 @@ data class Product(
     var measureUnit: String,
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
-    val category: Category,
+    var category: Category,
     @Column(nullable = false, unique = true)
     var price: BigDecimal,
-    @ManyToMany
-    var carts: List<Cart>,
 
 
 
