@@ -2,6 +2,7 @@ package com.JuMarket.autoatendimento.JuMarket.entity
 
 import jakarta.persistence.*
 import java.math.BigDecimal
+
 @Entity
 data class Product(
     @Id
@@ -19,4 +20,4 @@ data class Product(
 
 
 
-)
+    )

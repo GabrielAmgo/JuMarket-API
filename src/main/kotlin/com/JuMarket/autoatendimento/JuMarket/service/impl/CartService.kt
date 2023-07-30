@@ -25,9 +25,8 @@ class CartService(
     var cartItems: MutableMap<Long?, MutableList<Pair<Product, Int>>>,
 ): ICartService {
 
-    override fun save(cart: Cart) {
-        cartRepository.save(cart)
-    }
+    override fun save(cart: Cart): Cart =
+        this.cartRepository.save(cart)
     override fun addItem(cartId: Long?, productId: Long, amount: Int) {
         val cart = getOrCreateCart(cartId)
 
@@ -96,10 +95,6 @@ class CartService(
         )
     }
 
-    override fun findById(id: Long): Cart =
-            this.cartRepository.findById(id).orElseThrow{
-                throw RuntimeException ("Id $id not found")
-            }
 
     override fun clearCart(){
         cartItems.clear()
@@ -116,4 +111,8 @@ class CartService(
             cartRepository.save(newCart)
         }
     }
+    override fun findById(id: Long): Cart =
+        this.cartRepository.findById(id).orElseThrow{
+            throw RuntimeException ("Id $id not found")
+        }
 }

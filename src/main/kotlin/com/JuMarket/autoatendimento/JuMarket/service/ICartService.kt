@@ -8,7 +8,7 @@ import com.JuMarket.autoatendimento.JuMarket.entity.Product
 import jakarta.persistence.Id
 
 interface ICartService {
-    fun save(cart: Cart)
+    fun save(cart: Cart): Cart
     fun addItem(cartId: Long?, productId: Long, amount: Int)
     fun removeItem(productId: Long,amount: Int)
     fun displayCart() : Pair<Long?, List<CartItemInfoDto>>
