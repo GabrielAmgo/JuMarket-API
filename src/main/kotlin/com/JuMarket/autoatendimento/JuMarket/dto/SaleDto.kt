@@ -4,7 +4,7 @@ import com.JuMarket.autoatendimento.JuMarket.entity.Sale
 import java.math.BigDecimal
 
 data class SaleDto(
-    val id: Long,
+    val id: Long? = null,
     val paymentMethod: String,
     val totalValue: BigDecimal
 ) {

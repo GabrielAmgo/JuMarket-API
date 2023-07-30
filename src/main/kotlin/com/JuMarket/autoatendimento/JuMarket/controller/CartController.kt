@@ -1,10 +1,11 @@
 package com.JuMarket.autoatendimento.JuMarket.controller
 
-import com.JuMarket.autoatendimento.JuMarket.dto.CartDto
-import com.JuMarket.autoatendimento.JuMarket.dto.CartUpdateDto
-import com.JuMarket.autoatendimento.JuMarket.dto.CartView
+import com.JuMarket.autoatendimento.JuMarket.dto.*
 import com.JuMarket.autoatendimento.JuMarket.entity.Cart
+import com.JuMarket.autoatendimento.JuMarket.entity.Category
+import com.JuMarket.autoatendimento.JuMarket.entity.Product
 import com.JuMarket.autoatendimento.JuMarket.service.impl.CartService
+import jakarta.persistence.Id
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -13,30 +14,34 @@ class CartController(
     private val cartService: CartService
 ) {
 
-    @PostMapping
-    fun saveCart(@RequestBody cartDto: CartDto): String {
-        val savedCart = this.cartService.save(cartDto.toEntity())
-        return "Cart ${savedCart.id} saved!"
+    @PostMapping("/add")
+    fun addItem(@RequestBody request: CartItemDto): String {
+        cartService.addItem(request.cartId,request.productId, request.amount)
+    return "Item ${request.productId} added to your cart!"
     }
 
-    @GetMapping("/api/{id}")
+    @DeleteMapping("/remove")
+    fun removeItem(@RequestBody request: CartItemDto): String{
+        cartService.removeItem(request.productId, request.amount)
+    return "Item ${request.productId} removed from your cart!"
+    }
+
+    @GetMapping("/{id}")
     fun findById(@PathVariable id: Long) : CartView {
         val cart: Cart = this.cartService.findById(id)
         return CartView(cart)
     }
-
-    @DeleteMapping("/api/{id}")
-    fun deleteCart(@PathVariable id: Long) =
-        this.cartService.delete(id)
-
-    @PatchMapping
-    fun updateCart(@RequestParam(value = "customerId")id: Long,
-                   @RequestBody cartUpdateDto: CartUpdateDto
-    ):CartView{
-        val cart: Cart = this.cartService.findById(id)
-        val cartToUpdate: Cart = cartUpdateDto.toEntity(cart)
-        val cartUpdated: Cart = this.cartService.save(cartToUpdate)
-        return CartView(cartUpdated)
+    @GetMapping
+    fun displayCart(): Pair<Long?, List<CartItemInfoDto>> {
+        return cartService.displayCart()
     }
+
+    @DeleteMapping("/clear")
+    fun clearCart(): String{
+        cartService.clearCart()
+    return "All items has been removed from your cart!"
+    }
+
+
 
 }

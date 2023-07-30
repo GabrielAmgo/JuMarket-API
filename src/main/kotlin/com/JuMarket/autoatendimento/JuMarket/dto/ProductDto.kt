@@ -5,7 +5,7 @@ import com.JuMarket.autoatendimento.JuMarket.entity.Product
 import java.math.BigDecimal
 
 data class ProductDto(
-    val id: Long,
+    val id: Long? = null,
     var productName: String,
     var measureUnit: String,
     val category: Category,

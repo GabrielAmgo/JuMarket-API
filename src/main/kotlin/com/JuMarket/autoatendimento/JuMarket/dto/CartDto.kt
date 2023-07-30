@@ -1,21 +1,23 @@
 package com.JuMarket.autoatendimento.JuMarket.dto
 
+
 import com.JuMarket.autoatendimento.JuMarket.entity.Cart
-import com.JuMarket.autoatendimento.JuMarket.entity.Product
+import com.JuMarket.autoatendimento.JuMarket.entity.CartItem
+import com.JuMarket.autoatendimento.JuMarket.enum.PaymentMethod
 import java.math.BigDecimal
 
 data class CartDto (
-    val id: Long,
-    var items: List<Product>,
-    var itemCount: Int,
-    var totalValue: BigDecimal
+        val id: Long? = null,
+        var cartItems: MutableList<CartItem> = mutableListOf(),
+        var totalValue: BigDecimal,
+        var paymentMethod: PaymentMethod? = null
 ){
 
     fun toEntity(): Cart = Cart(
         id = this.id,
-        items = this.items,
-        itemCount = this.itemCount,
-        totalValue = this.totalValue
+        cartItems = this.cartItems,
+        totalValue = this.totalValue,
+        paymentMethod = this.paymentMethod
 
     )
 }

@@ -22,6 +22,6 @@ class ProductService(
             throw RuntimeException ("Id $id not found")
         }
 
-    override fun findAll(product: Product): List<Product> =
+    override fun findAll(): List<Product> =
         this.productRepository.findAll()
 }

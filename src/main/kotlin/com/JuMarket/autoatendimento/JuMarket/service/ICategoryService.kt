@@ -8,5 +8,5 @@ interface ICategoryService {
     fun delete(id: Long)
     fun findById(id: Long): Category
 
-    fun findAll(category: Category): List<Category>
+    fun findAll(): List<Category>
 }

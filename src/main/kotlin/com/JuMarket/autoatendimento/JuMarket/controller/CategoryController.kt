@@ -14,22 +14,28 @@ class CategoryController(
     @PostMapping
     fun saveCategory(@RequestBody categoryDto: CategoryDto): String {
         val savedCategory = this.categoryService.save(categoryDto.toEntity())
-        return "Category $savedCategory saved!"
+        return "Category ${savedCategory.name} saved!"
     }
 
-    @GetMapping("/api/{id}")
+    @GetMapping("/{id}")
     fun findById(@PathVariable id: Long) : CategoryView {
         val category: Category = this.categoryService.findById(id)
         return CategoryView(category)
     }
 
-    @DeleteMapping("/api/{id}")
+    @GetMapping("/categories")
+    fun findAll(): List<Category>{
+        return  categoryService.findAll()
+    }
+
+    @DeleteMapping("/{id}")
     fun deleteCategory(@PathVariable id: Long) =
         this.categoryService.delete(id)
 
     @PatchMapping
-    fun updateCategory(@RequestParam(value = "categoryId")id: Long,
-                       @RequestBody categoryUpdateDto: CategoryUpdateDto
+    fun updateCategory(
+        @RequestParam(value = "categoryId")id: Long,
+        @RequestBody categoryUpdateDto: CategoryUpdateDto
     ): CategoryView{
         val category: Category = this.categoryService.findById(id)
         val categoryToUpdate: Category = categoryUpdateDto.toEntity(category)

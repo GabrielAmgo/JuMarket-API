@@ -15,16 +15,21 @@ class ProductController(
     @PostMapping
     fun saveProduct (@RequestBody productDto: ProductDto): String{
         val savedProduct = this.productService.save(productDto.toEntity())
-        return "Product $savedProduct saved!"
+        return "Product ${savedProduct.productName} saved!"
     }
 
-    @GetMapping("/api/{id}")
+    @GetMapping("/{id}")
     fun findById(@PathVariable id: Long) : ProductView {
         val product: Product = this.productService.findById(id)
         return ProductView(product)
     }
 
-    @DeleteMapping("/api/{id}")
+    @GetMapping("/products")
+    fun findAll(): List<Product>{
+        return  productService.findAll()
+    }
+
+    @DeleteMapping("/{id}")
     fun deleteProduct(@PathVariable id: Long) =
         this.productService.delete(id)
 

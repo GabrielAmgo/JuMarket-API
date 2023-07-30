@@ -22,6 +22,6 @@ class CategoryService(
             throw RuntimeException ("Id $id not found")
         }
 
-    override fun findAll(category: Category): List<Category> =
+    override fun findAll(): List<Category> =
         this.categoryRepository.findAll()
 }
