@@ -15,7 +15,7 @@ class SaleService(
         private val cartService: CartService,
 ) : ISaleService {
 
-    override fun calculateTotalValue(cartId: Long): BigDecimal {
+    override fun calculateTotalValue(cartId: Int): BigDecimal {
         val cart = cartService.findById(cartId)
         var totalValue = BigDecimal.ZERO
 
@@ -29,14 +29,14 @@ class SaleService(
         return totalValue
     }
 
-    override fun paymentMethod(cartId: Long, paymentMethod: PaymentMethod): String {
+    override fun paymentMethod(cartId: Int, paymentMethod: PaymentMethod): String {
         val cart = cartService.findById(cartId)
         cart.paymentMethod = paymentMethod
         cartService.save(cart)
         return "Thank you for buying with us! Your cart $cartId has been paid with $paymentMethod!"
     }
 
-    override fun findById(id: Long): Sale =
+    override fun findById(id: Int): Sale =
             this.saleRepository.findById(id).orElseThrow {
                 throw RuntimeException("Sale $id not found")
             }

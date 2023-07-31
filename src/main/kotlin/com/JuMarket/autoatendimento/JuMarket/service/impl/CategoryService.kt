@@ -13,11 +13,11 @@ class CategoryService(
     override fun save(category: Category): Category =
         this.categoryRepository.save(category)
 
-    override fun delete(id: Long) {
+    override fun delete(id: Int) {
         this.categoryRepository.deleteById(id)
     }
 
-    override fun findById(id: Long): Category =
+    override fun findById(id: Int): Category =
         this.categoryRepository.findById(id).orElseThrow{
             throw RuntimeException ("Id $id not found")
         }

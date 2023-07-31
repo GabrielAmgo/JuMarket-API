@@ -7,7 +7,7 @@ import java.math.BigDecimal
 data class Product(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    val id: Int? = null,
     @Column(nullable = false, unique = true)
     var productName: String,
     @Column(nullable = false, unique = true)

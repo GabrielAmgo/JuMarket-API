@@ -4,7 +4,7 @@ import com.JuMarket.autoatendimento.JuMarket.enum.PaymentMethod
 import java.math.BigDecimal
 
 data class CartItemInfoDto(
-        val productId: Long,
+        val productId: Int,
         val productName: String,
         var amount: Int,
         val unitPrice: BigDecimal,

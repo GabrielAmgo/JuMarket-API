@@ -1,13 +1,10 @@
 package com.JuMarket.autoatendimento.JuMarket.service.impl
 
 
-import com.JuMarket.autoatendimento.JuMarket.dto.CartItemDto
 import com.JuMarket.autoatendimento.JuMarket.dto.CartItemInfoDto
 import com.JuMarket.autoatendimento.JuMarket.entity.Cart
 import com.JuMarket.autoatendimento.JuMarket.entity.CartItem
-import com.JuMarket.autoatendimento.JuMarket.entity.Category
 import com.JuMarket.autoatendimento.JuMarket.entity.Product
-import com.JuMarket.autoatendimento.JuMarket.enum.PaymentMethod
 import com.JuMarket.autoatendimento.JuMarket.repository.CartItemRepository
 import com.JuMarket.autoatendimento.JuMarket.repository.CartRepository
 import com.JuMarket.autoatendimento.JuMarket.repository.ProductRepository
@@ -22,12 +19,12 @@ class CartService(
     private val cartRepository: CartRepository,
     private val cartItemRepository: CartItemRepository,
     @Autowired
-    var cartItems: MutableMap<Long?, MutableList<Pair<Product, Int>>>,
+    var cartItems: MutableMap<Int?, MutableList<Pair<Product, Int>>>,
 ): ICartService {
 
     override fun save(cart: Cart): Cart =
         this.cartRepository.save(cart)
-    override fun addItem(cartId: Long?, productId: Long, amount: Int) {
+    override fun addItem(cartId: Int?, productId: Int, amount: Int) {
         val cart = getOrCreateCart(cartId)
 
         val product = productRepository.findById(productId).orElseThrow {
@@ -51,9 +48,9 @@ class CartService(
     }
 
 
-    override fun removeItem(productId: Long, amount: Int) {
+    override fun removeItem(cartId: Int?, productId: Int, amount: Int) {
         cartItems.forEach { (cartId, items) ->
-            val existingItem = items.find { it.first.id == productId }
+            val existingItem = items.find { it.first.id?.toInt() == productId }
             existingItem?.let {
                 val updatedQuantity = it.second - amount
                 if (updatedQuantity <= 0) {
@@ -76,8 +73,8 @@ class CartService(
         }
     }
 
-    override fun displayCart(): Pair<Long?, List<CartItemInfoDto>> {
-        val cartId: Long? = cartItems.keys.firstOrNull()
+    override fun displayCart(): Pair<Int?, List<CartItemInfoDto>> {
+        val cartId: Int? = cartItems.keys.firstOrNull()
         val cartItemsInfo = cartItems.flatMap { (_, items) -> items }
             .map { getCartItemInfo(it) }
         return Pair(cartId, cartItemsInfo)
@@ -100,7 +97,7 @@ class CartService(
         cartItems.clear()
     }
 
-    private fun getOrCreateCart(cartId: Long?): Cart {
+    private fun getOrCreateCart(cartId: Int?): Cart {
         return cartId?.let {
             cartRepository.findById(it).orElseGet {
                 val newCart = Cart()
@@ -111,7 +108,7 @@ class CartService(
             cartRepository.save(newCart)
         }
     }
-    override fun findById(id: Long): Cart =
+    override fun findById(id: Int): Cart =
         this.cartRepository.findById(id).orElseThrow{
             throw RuntimeException ("Id $id not found")
         }

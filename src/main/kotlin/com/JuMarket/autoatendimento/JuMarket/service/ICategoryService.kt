@@ -5,8 +5,8 @@ import com.JuMarket.autoatendimento.JuMarket.entity.Category
 
 interface ICategoryService {
     fun save(category: Category): Category
-    fun delete(id: Long)
-    fun findById(id: Long): Category
+    fun delete(id: Int)
+    fun findById(id: Int): Category
 
     fun findAll(): List<Category>
 }

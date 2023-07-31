@@ -13,11 +13,11 @@ class ProductService(
     override fun save(product: Product): Product =
         this.productRepository.save(product)
 
-    override fun delete(id: Long) {
+    override fun delete(id: Int) {
         this.productRepository.deleteById(id)
     }
 
-    override fun findById(id: Long): Product =
+    override fun findById(id: Int): Product =
         this.productRepository.findById(id).orElseThrow {
             throw RuntimeException ("Id $id not found")
         }

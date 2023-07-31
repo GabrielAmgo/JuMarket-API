@@ -20,17 +20,17 @@ class SaleController(
 ) {
 
     @GetMapping("/{cartId}/totalValue")
-    fun calculateTotalValue(@PathVariable cartId: Long): BigDecimal {
+    fun calculateTotalValue(@PathVariable cartId: Int): BigDecimal {
         return saleService.calculateTotalValue(cartId)
     }
 
     @PostMapping("/paymentMethod")
-    fun updatePaymentMethod(@RequestParam cartId: Long, @RequestParam paymentMethod: PaymentMethod): String {
+    fun updatePaymentMethod(@RequestParam cartId: Int, @RequestParam paymentMethod: PaymentMethod): String {
         return saleService.paymentMethod(cartId, paymentMethod)
     }
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Long) : SaleView {
+    fun findById(@PathVariable id: Int) : SaleView {
         val sale: Sale = this.saleService.findById(id)
         return SaleView(sale)
     }

@@ -7,7 +7,7 @@ import com.JuMarket.autoatendimento.JuMarket.enum.PaymentMethod
 import java.math.BigDecimal
 
 data class CartView(
-        val id: Long? = null,
+        val id: Int? = null,
         var cartItems: MutableList<CartItem> = mutableListOf(),
         var totalValue: BigDecimal?,
         var paymentMethod: PaymentMethod? = null

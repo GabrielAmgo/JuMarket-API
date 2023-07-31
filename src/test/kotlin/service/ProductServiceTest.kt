@@ -21,9 +21,9 @@ class ProductServiceTest {
     @InjectMocks
     private lateinit var productService: ProductService
 
-    private val testProductId = 1L
+    private val testProductId = 1
     private val testProductName = "Test Product"
-    private val testCategoryId = 1L
+    private val testCategoryId = 1
 
     @BeforeEach
     fun setUp() {

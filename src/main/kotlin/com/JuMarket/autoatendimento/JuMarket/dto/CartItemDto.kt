@@ -4,8 +4,8 @@ import com.JuMarket.autoatendimento.JuMarket.entity.Cart
 import java.math.BigDecimal
 
 data class CartItemDto(
-        var cartId: Long,
-        var productId: Long,
-        var amount: Int
+        var cartId: Int,
+        var productId: Int,
+        var amount: Int,
 )
 

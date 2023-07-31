@@ -19,7 +19,7 @@ class ProductController(
     }
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Long) : ProductView {
+    fun findById(@PathVariable id: Int) : ProductView {
         val product: Product = this.productService.findById(id)
         return ProductView(product)
     }
@@ -30,11 +30,11 @@ class ProductController(
     }
 
     @DeleteMapping("/{id}")
-    fun deleteProduct(@PathVariable id: Long) =
+    fun deleteProduct(@PathVariable id: Int) =
         this.productService.delete(id)
 
     @PatchMapping
-    fun updateProduct(@RequestParam(value = "productId")id: Long,
+    fun updateProduct(@RequestParam(value = "productId")id: Int,
                       @RequestBody productUpdateDto: ProductUpdateDto
     ): ProductView{
         val product: Product = this.productService.findById(id)

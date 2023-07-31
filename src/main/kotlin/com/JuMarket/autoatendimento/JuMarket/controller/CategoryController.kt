@@ -18,7 +18,7 @@ class CategoryController(
     }
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Long) : CategoryView {
+    fun findById(@PathVariable id: Int) : CategoryView {
         val category: Category = this.categoryService.findById(id)
         return CategoryView(category)
     }
@@ -29,12 +29,12 @@ class CategoryController(
     }
 
     @DeleteMapping("/{id}")
-    fun deleteCategory(@PathVariable id: Long) =
+    fun deleteCategory(@PathVariable id: Int) =
         this.categoryService.delete(id)
 
     @PatchMapping
     fun updateCategory(
-        @RequestParam(value = "categoryId")id: Long,
+        @RequestParam(value = "categoryId")id: Int,
         @RequestBody categoryUpdateDto: CategoryUpdateDto
     ): CategoryView{
         val category: Category = this.categoryService.findById(id)

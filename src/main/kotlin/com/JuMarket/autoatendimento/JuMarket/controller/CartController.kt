@@ -2,10 +2,7 @@ package com.JuMarket.autoatendimento.JuMarket.controller
 
 import com.JuMarket.autoatendimento.JuMarket.dto.*
 import com.JuMarket.autoatendimento.JuMarket.entity.Cart
-import com.JuMarket.autoatendimento.JuMarket.entity.Category
-import com.JuMarket.autoatendimento.JuMarket.entity.Product
 import com.JuMarket.autoatendimento.JuMarket.service.impl.CartService
-import jakarta.persistence.Id
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -22,17 +19,17 @@ class CartController(
 
     @DeleteMapping("/remove")
     fun removeItem(@RequestBody request: CartItemDto): String{
-        cartService.removeItem(request.productId, request.amount)
+        cartService.removeItem(request.cartId, request.productId, request.amount)
     return "Item ${request.productId} removed from your cart!"
     }
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Long) : CartView {
+    fun findById(@PathVariable id: Int) : CartView {
         val cart: Cart = this.cartService.findById(id)
         return CartView(cart)
     }
     @GetMapping
-    fun displayCart(): Pair<Long?, List<CartItemInfoDto>> {
+    fun displayCart(): Pair<Int?, List<CartItemInfoDto>> {
         return cartService.displayCart()
     }
 

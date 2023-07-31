@@ -3,7 +3,7 @@ package com.JuMarket.autoatendimento.JuMarket.dto
 import com.JuMarket.autoatendimento.JuMarket.entity.Category
 
 data class CategoryDto(
-    val id: Long? = null,
+    val id: Int? = null,
     var name: String
 ) {
 

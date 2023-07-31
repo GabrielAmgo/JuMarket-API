@@ -8,7 +8,7 @@ import jakarta.persistence.ManyToOne
 import java.math.BigDecimal
 
 class ProductView(
-    val id: Long? = null,
+    val id: Int? = null,
     var productName: String,
     var measureUnit: String,
     val category: Category,

@@ -8,7 +8,7 @@ import java.math.BigDecimal
 data class Cart(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
+    var id: Int? = null,
     @OneToMany(mappedBy = "cart", cascade = [CascadeType.ALL], orphanRemoval = true)
     var cartItems: MutableList<CartItem> = mutableListOf(),
     @Column(nullable = true)

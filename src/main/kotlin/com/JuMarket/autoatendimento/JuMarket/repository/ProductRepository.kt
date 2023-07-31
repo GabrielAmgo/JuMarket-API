@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ProductRepository : JpaRepository<Product, Long>{
+interface ProductRepository : JpaRepository<Product, Int>{
 
 
    

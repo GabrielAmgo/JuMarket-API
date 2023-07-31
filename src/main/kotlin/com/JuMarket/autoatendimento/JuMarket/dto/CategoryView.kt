@@ -4,7 +4,7 @@ import com.JuMarket.autoatendimento.JuMarket.entity.Category
 
 
 data class CategoryView(
-    val id: Long? = null,
+    val id: Int? = null,
     var name: String = ""
     ) {
 
