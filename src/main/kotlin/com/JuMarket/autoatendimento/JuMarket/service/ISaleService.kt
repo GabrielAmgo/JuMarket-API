@@ -8,7 +8,7 @@ import java.math.BigDecimal
 
 interface ISaleService {
 
-    fun calculateTotalValue(cartId: Int): BigDecimal
+    fun calculateTotalValue(cartId: Int): String
     fun paymentMethod (cartId: Int, paymentMethod: PaymentMethod): String
     fun findById(id: Int): Sale
     fun findAll(): List<Sale>

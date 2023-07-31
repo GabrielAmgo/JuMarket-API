@@ -32,14 +32,9 @@ class ProductServiceTest {
 
     @Test
     fun `findById should return the correct product`() {
-        // Arrange
         val expectedProduct = Product(id = testProductId, productName = testProductName, price = BigDecimal(10), measureUnit = "300g", category = Category(testCategoryId, name = "Test Category"))
         `when`(productRepository.findById(testProductId)).thenReturn(Optional.of(expectedProduct))
-
-        // Act
         val result = productService.findById(testProductId)
-
-        // Assert
         assertEquals(expectedProduct, result)
     }
 }

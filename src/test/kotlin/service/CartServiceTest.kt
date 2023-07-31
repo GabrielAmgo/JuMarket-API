@@ -47,8 +47,6 @@ class CartServiceTest {
         `when`(cartRepository.save(cart)).thenReturn(cart)
 
         cartService.addItem(cart.id, productId, amount)
-
-        // Add your assertions here to check if the item is added to the cart as expected
     }
 
     @Test
@@ -64,8 +62,6 @@ class CartServiceTest {
         `when`(cartRepository.findById(productId)).thenReturn(Optional.of(cart))
 
         cartService.removeItem(cart.id, productId, amount)
-
-        // Add your assertions here to check if the item is removed from the cart as expected
     }
 
 }

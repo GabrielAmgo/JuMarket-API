@@ -1,7 +1,7 @@
 CREATE TABLE cart_item (
   id BIGINT AUTO_INCREMENT NOT NULL,
-   cart_id BIGINT NULL,
-   product_id BIGINT NULL,
+   cart_id INT NULL,
+   product_id INT NULL,
    amount INT NOT NULL,
    CONSTRAINT pk_cartitem PRIMARY KEY (id)
 );

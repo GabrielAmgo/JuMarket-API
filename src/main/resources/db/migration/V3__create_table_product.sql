@@ -1,8 +1,8 @@
 CREATE TABLE product (
-  id BIGINT AUTO_INCREMENT NOT NULL,
+  id INT AUTO_INCREMENT NOT NULL,
    product_name VARCHAR(255) NOT NULL,
    measure_unit VARCHAR(255) NOT NULL,
-   category_id BIGINT NOT NULL,
+   category_id INT NOT NULL,
    price DECIMAL NOT NULL,
    CONSTRAINT pk_product PRIMARY KEY (id)
 );

@@ -20,7 +20,7 @@ class SaleController(
 ) {
 
     @GetMapping("/{cartId}/totalValue")
-    fun calculateTotalValue(@PathVariable cartId: Int): BigDecimal {
+    fun calculateTotalValue(@PathVariable cartId: Int): String {
         return saleService.calculateTotalValue(cartId)
     }
 

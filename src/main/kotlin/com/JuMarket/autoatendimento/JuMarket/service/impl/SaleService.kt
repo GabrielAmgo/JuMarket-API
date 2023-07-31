@@ -15,7 +15,7 @@ class SaleService(
         private val cartService: CartService,
 ) : ISaleService {
 
-    override fun calculateTotalValue(cartId: Int): BigDecimal {
+    override fun calculateTotalValue(cartId: Int): String {
         val cart = cartService.findById(cartId)
         var totalValue = BigDecimal.ZERO
 
@@ -26,7 +26,7 @@ class SaleService(
             totalValue = totalValue.add(itemPrice)
         }
 
-        return totalValue
+        return "Your cart total value is R$${totalValue}"
     }
 
     override fun paymentMethod(cartId: Int, paymentMethod: PaymentMethod): String {
