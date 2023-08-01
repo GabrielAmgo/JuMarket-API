@@ -34,7 +34,7 @@ class SaleServiceTest {
 
     @Test
     fun `test calculateTotalValue`() {
-        // Create some sample data for testing
+
         val cartId = 1
         val productId1 = 1
         val amount1 = 2
@@ -48,35 +48,28 @@ class SaleServiceTest {
                 CartItem(id = 1, cart = Cart(id = 1), product = product2, amount2)
         ))
 
-        // Mock the findById method of cartService to return the sample cart
         `when`(cartService.findById(cartId)).thenReturn(cart)
 
-        // Define the expected total value
-        val expectedTotalValue = BigDecimal.valueOf(2 * 25 + 3)
+        val expectedTotalValue = "Your cart total value is R$${BigDecimal.valueOf(2 * 25 + 3)}"
 
-        // Call the function to be tested
         val totalValue = saleService.calculateTotalValue(cartId)
 
-        // Assertions
         assertEquals(expectedTotalValue, totalValue)
     }
 
     @Test
     fun `test paymentMethod`() {
-        // Create some sample data for testing
+
         val cartId = 1
         val paymentMethod = PaymentMethod.CREDIT_CARD
 
         val cart = Cart(id = cartId)
 
-        // Mock the findById and save methods of cartService to return the sample cart
         `when`(cartService.findById(cartId)).thenReturn(cart)
         `when`(cartService.save(cart)).thenReturn(cart)
 
-        // Call the function to be tested
         val resultMessage = saleService.paymentMethod(cartId, paymentMethod)
 
-        // Assertions
         val expectedMessage = "Thank you for buying with us! Your cart $cartId has been paid with $paymentMethod!"
         assertEquals(expectedMessage, resultMessage)
         assertEquals(paymentMethod, cart.paymentMethod)

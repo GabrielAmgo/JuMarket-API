@@ -27,57 +27,49 @@ class CategoryServiceTest {
 
     @Test
     fun `test save`() {
-        // Create some sample data for testing
+
         val categoryId = 1
         val categoryName = "Snack"
         val category = Category(id = categoryId, name = categoryName)
 
-        // Mock the save method of categoryRepository to return the sample category
         `when`(categoryRepository.save(category)).thenReturn(category)
 
-        // Call the function to be tested
         val savedCategory = categoryService.save(category)
 
-        // Assertions
         assertEquals(category, savedCategory)
     }
 
     @Test
     fun `test delete`() {
-        // Create some sample data for testing
+
         val categoryId = 1
 
-        // Call the function to be tested
         categoryService.delete(categoryId)
 
     }
 
     @Test
     fun `test findById`() {
-        // Create some sample data for testing
+
         val categoryId = 1
         val categoryName = "Snack"
         val category = Category(id = categoryId, name = categoryName)
 
-        // Mock the findById method of categoryRepository to return the sample category
         `when`(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category))
 
-        // Call the function to be tested
         val foundCategory = categoryService.findById(categoryId)
 
-        // Assertions
+
         assertEquals(category, foundCategory)
     }
 
     @Test
     fun `test findById with invalid id`() {
-        // Create some sample data for testing
+
         val invalidCategoryId = 99
 
-        // Mock the findById method of categoryRepository to return an empty optional
         `when`(categoryRepository.findById(invalidCategoryId)).thenReturn(Optional.empty())
 
-        // Call the function to be tested and expect an exception to be thrown
         assertThrows<RuntimeException> {
             categoryService.findById(invalidCategoryId)
         }
@@ -85,7 +77,7 @@ class CategoryServiceTest {
 
     @Test
     fun `test findAll`() {
-        // Create some sample data for testing
+
         val categoryId1 = 1
         val categoryName1 = "Snack"
         val category1 = Category(id = categoryId1, name = categoryName1)
@@ -96,15 +88,11 @@ class CategoryServiceTest {
 
         val categories = listOf(category1, category2)
 
-        // Mock the findAll method of categoryRepository to return the sample categories
         `when`(categoryRepository.findAll()).thenReturn(categories)
 
-        // Call the function to be tested
         val allCategories = categoryService.findAll()
 
-        // Assertions
         assertEquals(categories, allCategories)
     }
 
-    // Add more test cases for other functions if necessary
 }
